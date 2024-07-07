@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -std=c11 -g
-SRCS = collision_detection.c
+SRCS = Collision-Detector.c
 OBJS = $(SRCS:.c=.o)
 TARGET = pa2
 
@@ -11,6 +11,9 @@ $(TARGET): $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $<
+
+test: $(TARGET)
+	./$(TARGET) points.txt
 
 clean:
 	rm -f $(TARGET) $(OBJS) *~
