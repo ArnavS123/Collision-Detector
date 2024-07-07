@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     int query_y;
     int query_r;
 
-    while (printf("> "), scanf("%d %d %d", &query_x, &query_y, &query_r) == 3) // Exactly like example: while loop and "> " used to ask for continuous user input
+    while (scanf("%d %d %d", &query_x, &query_y, &query_r) == 3)
     {
         int collision_count = 0;
         double r_squared = query_r * query_r;
