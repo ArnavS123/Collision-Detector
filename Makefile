@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -std=c11 -g
+CFLAGS = -std=c11 -g -O3 -lm
 SRCS = Collision-Detector.c
 OBJS = $(SRCS:.c=.o)
 TARGET = pa2
