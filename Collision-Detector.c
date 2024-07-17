@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Using typedef now means I don't need to keep writing struct Point or struct KDNode
 typedef struct Point
 {
     int x, y;
@@ -44,6 +45,11 @@ KDNode* buildKDTree(Point points[], int start, int end, int depth)
     }
 
     KDNode *node = (KDNode *)malloc(sizeof(KDNode));
+    if (!node)
+    {
+        perror("Failed to allocate memory");
+        return(1);
+    }
     node->point = points[mid];
     node->left = buildKDTree(points, start, mid - 1, depth + 1);
     node->right = buildKDTree(points, mid + 1, end, depth + 1);
@@ -84,6 +90,14 @@ int countPointsInCircle(KDNode *root, Point center, int radius, int depth)
     }
 
     return(count);
+}
+
+void freeKDTree(KDNode *root)
+{
+    if (root == NULL) return;
+    freeKDTree(root->left);
+    freeKDTree(root->right);
+    free(root);
 }
 
 int main(int argc, char *argv[])
@@ -135,6 +149,9 @@ int main(int argc, char *argv[])
         int count = countPointsInCircle(root, center, r, 0);
         printf("%d\n", count);
     }
+
+    freeKDTree(root);
+    free(points);
 
     return(0);
 }
